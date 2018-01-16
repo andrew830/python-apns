@@ -123,7 +123,7 @@ class APNsClient(object):
         return token.decode('ascii')
 
     def _send_message(self, registration_id, alert, 
-            badge=None, sound=None, category=None, content_available=False,
+            badge=None, sound=None, category=None, content_available=False, mutable_content=None,
             action_loc_key=None, loc_key=None, loc_args=[], extra={}, 
             identifier=None, expiration=None, priority=10, 
             connection=None, auth_token=None, bundle_id=None, topic=None
@@ -156,6 +156,9 @@ class APNsClient(object):
 
         if category is not None:
             aps_data["category"] = category
+
+        if mutable_content is not None:
+            aps_data["mutable-content"] = mutable_content
 
         if content_available:
             aps_data["content-available"] = 1
